@@ -26,7 +26,10 @@ class MasterViewController: UITableViewController {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
 
+        // Setup
         self.parent?.view.backgroundColor = .white
+        self.navigationController?.delegate = self
+
         self.insertNewObject(self)
     }
 
@@ -78,21 +81,15 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = object.description
         return cell
     }
+}
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+extension MasterViewController: UINavigationControllerDelegate {
+
+    public func navigationController(_ navigationController: UINavigationController,
+                                     animationControllerFor operation: UINavigationControllerOperation,
+                                     from fromVC: UIViewController,
+                                     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TransparentPushAnimator(operation: operation)
     }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-
 }
 
