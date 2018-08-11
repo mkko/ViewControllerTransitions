@@ -15,13 +15,12 @@ class TransparentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.parent?.view.backgroundColor = .white
-        self.navigationController?.delegate = self
-
         if let c = self.navigationController?.viewControllers.count, c > 1 {
             let title = pushButton.title(for: .normal)!
             pushButton.setTitle("\(title) (\(c))", for: .normal)
         } else {
+            // Setup the first view controller in the stack.
+            self.navigationController?.delegate = self
 
             let layer = CAGradientLayer()
             layer.frame = self.view.frame
