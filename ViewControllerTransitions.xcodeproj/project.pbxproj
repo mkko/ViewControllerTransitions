@@ -14,6 +14,7 @@
 		2B2F5925211ED42200973F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F5924211ED42200973F7B /* Assets.xcassets */; };
 		2B2F5928211ED42200973F7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F5926211ED42200973F7B /* LaunchScreen.storyboard */; };
 		2B2F5930211ED5FF00973F7B /* TransparentPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */; };
+		2B2F5932211EDBED00973F7B /* TransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F5931211EDBED00973F7B /* TransparentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2B2F5927211ED42200973F7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B2F5929211ED42200973F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPushAnimator.swift; sourceTree = "<group>"; };
+		2B2F5931211EDBED00973F7B /* TransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				2B2F591B211ED42100973F7B /* AppDelegate.swift */,
 				2B2F591D211ED42100973F7B /* MasterViewController.swift */,
 				2B2F591F211ED42100973F7B /* DetailViewController.swift */,
+				2B2F5931211EDBED00973F7B /* TransparentViewController.swift */,
 				2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */,
 				2B2F5921211ED42100973F7B /* Main.storyboard */,
 				2B2F5924211ED42200973F7B /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B2F5920211ED42100973F7B /* DetailViewController.swift in Sources */,
+				2B2F5932211EDBED00973F7B /* TransparentViewController.swift in Sources */,
 				2B2F5930211ED5FF00973F7B /* TransparentPushAnimator.swift in Sources */,
 				2B2F591E211ED42100973F7B /* MasterViewController.swift in Sources */,
 				2B2F591C211ED42100973F7B /* AppDelegate.swift in Sources */,
