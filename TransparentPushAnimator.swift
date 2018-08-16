@@ -10,7 +10,7 @@ import UIKit
 
 open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
-    class FrameView: UIView {
+    fileprivate class FrameView: UIView {
 
         class ShadowView: UIView {
             override class var layerClass: AnyClass {
@@ -126,3 +126,54 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
     }
 }
 
+class TransparentNavigationController: UINavigationController {
+
+    private var interactionController: UIPercentDrivenInteractiveTransition?
+
+    private var edgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.delegate = self
+
+        self.edgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(pan(_:)))
+        self.edgePanGestureRecognizer.edges = .left
+        self.view.addGestureRecognizer(edgePanGestureRecognizer)
+    }
+
+    @objc func pan(_ sender: UIScreenEdgePanGestureRecognizer) {
+        guard let view = sender.view else {
+            return
+        }
+
+        let percentComplete = sender.translation(in: view).x / view.bounds.width
+
+        switch sender.state {
+        case .began:
+            self.interactionController = UIPercentDrivenInteractiveTransition()
+            popViewController(animated: true)
+        case .changed:
+            interactionController?.update(percentComplete)
+        case .ended:
+            if percentComplete > 0.5 && sender.state != .cancelled {
+                interactionController?.finish()
+            } else {
+                interactionController?.cancel()
+            }
+            interactionController = nil
+        default:
+            break
+        }
+    }
+}
+
+extension TransparentNavigationController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TransparentPushAnimator(operation: operation)
+    }
+
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactionController
+    }
+}

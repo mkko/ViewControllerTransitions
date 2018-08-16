@@ -20,14 +20,14 @@ class TransparentViewController: UIViewController {
             pushButton.setTitle("\(title) (\(c))", for: .normal)
         } else {
             // Setup the first view controller in the stack.
-            self.navigationController?.delegate = self
 
             let layer = CAGradientLayer()
             layer.frame = self.view.frame
             layer.colors = [
-                UIColor(hue: 82/360, saturation: 32/100, brightness: 96/100, alpha: 1),
-                UIColor(hue: 102/360, saturation: 28/100, brightness: 79/100, alpha: 1)
+                (h: 200, s: 70, b: 85, a: 1),
+                (h: 160, s: 70, b: 85, a: 1)
                 ]
+                .map { UIColor(hue: $0.h/360, saturation: $0.s/100, brightness: $0.b/100, alpha: $0.a) }
                 .map { $0.cgColor }
 
             UIGraphicsBeginImageContext(self.view.frame.size)
@@ -57,14 +57,3 @@ class TransparentViewController: UIViewController {
     */
 
 }
-
-extension TransparentViewController: UINavigationControllerDelegate {
-
-    public func navigationController(_ navigationController: UINavigationController,
-                                     animationControllerFor operation: UINavigationControllerOperation,
-                                     from fromVC: UIViewController,
-                                     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TransparentPushAnimator(operation: operation)
-    }
-}
-

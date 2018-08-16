@@ -26,8 +26,8 @@
 		2B2F5924211ED42200973F7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B2F5927211ED42200973F7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B2F5929211ED42200973F7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentPushAnimator.swift; sourceTree = "<group>"; };
-		2B2F5931211EDBED00973F7B /* TransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentViewController.swift; sourceTree = "<group>"; };
+		2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransparentPushAnimator.swift; path = ../TransparentPushAnimator.swift; sourceTree = "<group>"; };
+		2B2F5931211EDBED00973F7B /* TransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +44,7 @@
 		2B2F590F211ED42100973F7B = {
 			isa = PBXGroup;
 			children = (
+				2B2F5933211F116900973F7B /* Animations */,
 				2B2F591A211ED42100973F7B /* ViewControllerTransitions */,
 				2B2F5919211ED42100973F7B /* Products */,
 			);
@@ -64,13 +65,20 @@
 				2B2F591D211ED42100973F7B /* MasterViewController.swift */,
 				2B2F591F211ED42100973F7B /* DetailViewController.swift */,
 				2B2F5931211EDBED00973F7B /* TransparentViewController.swift */,
-				2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */,
 				2B2F5921211ED42100973F7B /* Main.storyboard */,
 				2B2F5924211ED42200973F7B /* Assets.xcassets */,
 				2B2F5926211ED42200973F7B /* LaunchScreen.storyboard */,
 				2B2F5929211ED42200973F7B /* Info.plist */,
 			);
-			path = ViewControllerTransitions;
+			name = ViewControllerTransitions;
+			sourceTree = "<group>";
+		};
+		2B2F5933211F116900973F7B /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				2B2F592F211ED5FF00973F7B /* TransparentPushAnimator.swift */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +301,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ViewControllerTransitions/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +318,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ViewControllerTransitions/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
