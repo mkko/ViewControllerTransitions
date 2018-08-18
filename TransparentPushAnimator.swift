@@ -59,8 +59,11 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
 
     private let operation: UINavigationControllerOperation
 
-    public init(operation: UINavigationControllerOperation) {
+    private let isInteractive: Bool
+
+    public init(operation: UINavigationControllerOperation, isInteractive: Bool) {
         self.operation = operation
+        self.isInteractive = isInteractive
     }
 
     open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -107,7 +110,10 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
         clippingView.shadowOpacity = 1.0
 
         let duration = self.transitionDuration(using: transitionContext)
-        UIView.animate(withDuration: duration, animations: {
+        let options: UIViewAnimationOptions = self.isInteractive
+            ? [.curveLinear]
+            : [.curveEaseInOut]
+        UIView.animate(withDuration: duration, delay: 0.0, options: options, animations: {
             clippingView.frame = (self.operation == .push ? c2 : c1)
             clippingView.shadowOpacity = 0
             clippingView.layoutIfNeeded()
@@ -126,7 +132,6 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
             if self.operation == .pop {
                 transitionContext.containerView.addSubview(viewController1.view)
             }
-
         })
     }
 }
@@ -177,7 +182,8 @@ class TransparentNavigationController: UINavigationController {
 
 extension TransparentNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TransparentPushAnimator(operation: operation)
+        let isInteractive = (self.interactionController != nil)
+        return TransparentPushAnimator(operation: operation, isInteractive: isInteractive)
     }
 
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
