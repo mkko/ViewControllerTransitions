@@ -113,15 +113,20 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
             clippingView.layoutIfNeeded()
 
             viewController2.view.frame = self.operation == .push ? f2 : f1
-        }, completion: { finished in
-            transitionContext.completeTransition(finished)
+        }, completion: { _ in
+            let didComplete = !transitionContext.transitionWasCancelled
+            if didComplete {
+                // If we did a pop, clean up view hierarchy.
+                clippingView.removeFromSuperview()
+                viewController1.view.removeFromSuperview()
+            }
 
-            // If we did a pop, clean up view hierarchy.
-            clippingView.removeFromSuperview()
-            viewController1.view.removeFromSuperview()
+            transitionContext.completeTransition(didComplete)
+
             if self.operation == .pop {
                 transitionContext.containerView.addSubview(viewController1.view)
             }
+
         })
     }
 }
@@ -142,6 +147,8 @@ class TransparentNavigationController: UINavigationController {
         self.view.addGestureRecognizer(edgePanGestureRecognizer)
     }
 
+    var vc: UIViewController?
+
     @objc func pan(_ sender: UIScreenEdgePanGestureRecognizer) {
         guard let view = sender.view else {
             return
@@ -152,11 +159,11 @@ class TransparentNavigationController: UINavigationController {
         switch sender.state {
         case .began:
             self.interactionController = UIPercentDrivenInteractiveTransition()
-            popViewController(animated: true)
+            vc = popViewController(animated: true)
         case .changed:
             interactionController?.update(percentComplete)
         case .ended:
-            if percentComplete > 0.5 && sender.state != .cancelled {
+            if percentComplete >= 0.5 && sender.state != .cancelled {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()
