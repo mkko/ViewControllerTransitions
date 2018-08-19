@@ -150,6 +150,7 @@ class TransparentNavigationController: UINavigationController {
 
         self.edgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(pan(_:)))
         self.edgePanGestureRecognizer.edges = .left
+        self.edgePanGestureRecognizer.delegate = self
         self.view.addGestureRecognizer(edgePanGestureRecognizer)
     }
 
@@ -190,4 +191,8 @@ extension TransparentNavigationController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
     }
+}
+
+extension TransparentNavigationController: UIGestureRecognizerDelegate {
+
 }
