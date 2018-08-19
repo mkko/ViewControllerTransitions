@@ -67,7 +67,7 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
     }
 
     open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 0.35
     }
 
     open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
