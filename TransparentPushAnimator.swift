@@ -125,13 +125,14 @@ open class TransparentPushAnimator: NSObject, UIViewControllerAnimatedTransition
                 // If we did a pop, clean up view hierarchy.
                 clippingView.removeFromSuperview()
                 viewController1.view.removeFromSuperview()
+
+                if self.operation == .pop {
+                    transitionContext.containerView.addSubview(viewController1.view)
+                }
             }
 
             transitionContext.completeTransition(didComplete)
 
-            if self.operation == .pop {
-                transitionContext.containerView.addSubview(viewController1.view)
-            }
         })
     }
 }
